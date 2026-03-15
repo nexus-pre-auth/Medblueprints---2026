@@ -1,0 +1,45 @@
+# MedBlueprints — Caddy reverse proxy
+# Auto-provisions TLS certificates via Let's Encrypt.
+# Replace medblueprints.com with your actual domain.
+
+# ── Frontend — main site ─────────────────────────────────────────────
+medblueprints.com, www.medblueprints.com {
+    encode gzip
+
+    # Forward all traffic to the Next.js container
+    reverse_proxy frontend:3000
+
+    # Security headers
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+        X-Content-Type-Options "nosniff"
+        X-Frame-Options "DENY"
+        Referrer-Policy "strict-origin-when-cross-origin"
+        -Server
+    }
+
+    log {
+        output file /var/log/caddy/frontend.log
+        format json
+    }
+}
+
+# ── API — backend ────────────────────────────────────────────────────
+api.medblueprints.com {
+    encode gzip
+
+    # Forward to FastAPI
+    reverse_proxy api:8000
+
+    # CORS is handled in FastAPI — Caddy just proxies
+    header {
+        Strict-Transport-Security "max-age=31536000; includeSubDomains"
+        X-Content-Type-Options "nosniff"
+        -Server
+    }
+
+    log {
+        output file /var/log/caddy/api.log
+        format json
+    }
+}

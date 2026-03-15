@@ -1,12 +1,14 @@
 version: "3.9"
 
-# MedBlueprints Full Stack
+# MedBlueprints Full Stack — Local / CI compose
+# For production (medblueprints.com) use docker-compose.prod.yml
+#
 # Services:
-#   api       — FastAPI backend (all AI intelligence layers)
-#   frontend  — Next.js dashboard
-#   db        — PostgreSQL (project + outcome dataset)
-#   redis     — Job queue for async blueprint processing
-#   worker    — Celery worker (heavy CV + LLM tasks)
+#   api      — FastAPI backend (all AI intelligence layers)
+#   frontend — Next.js dashboard
+#   db       — PostgreSQL (project + outcome dataset)
+#   redis    — Job queue for async blueprint processing
+#   worker   — Celery worker (requires src/worker/ — use 'celery' profile)
 
 services:
   # ── API (FastAPI) ────────────────────────────────────────────────────
@@ -28,6 +30,9 @@ services:
       - NEO4J_USER=${NEO4J_USER:-neo4j}
       - NEO4J_PASSWORD=${NEO4J_PASSWORD:-}
       - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - REQUIRE_API_KEY=${REQUIRE_API_KEY:-false}
+      - DEMO_API_KEY=${DEMO_API_KEY:-demo-medblueprints-2026}
+      - API_KEYS=${API_KEYS:-}
     volumes:
       - ./data:/app/data
       - ./src:/app/src:ro
@@ -44,7 +49,8 @@ services:
       retries: 3
       start_period: 30s
 
-  # ── Celery Worker (async blueprint analysis) ─────────────────────────
+  # ── Celery Worker (async blueprint analysis) ──────────────────────────
+  # Requires src/worker/celery_app.py — enable with: docker compose --profile celery up
   worker:
     build:
       context: .
@@ -52,6 +58,8 @@ services:
     image: medblueprints-api:latest
     container_name: medblueprints-worker
     command: celery -A src.worker.celery_app worker --loglevel=info --concurrency=2
+    profiles:
+      - celery
     environment:
       - DATABASE_URL=postgresql+asyncpg://medblueprints:${POSTGRES_PASSWORD:-medblueprints}@db:5432/medblueprints
       - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
@@ -75,7 +83,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8000
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000}
       - NEXT_PUBLIC_APP_NAME=MedBlueprints
     depends_on:
       - api
@@ -130,7 +138,7 @@ services:
       - neo4j_data:/data
     restart: unless-stopped
     profiles:
-      - graph  # Only start when USE_NEO4J=true: docker compose --profile graph up
+      - graph  # docker compose --profile graph up
 
 volumes:
   postgres_data:

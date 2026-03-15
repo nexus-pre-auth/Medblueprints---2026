@@ -33,7 +33,7 @@ import os
 import re
 import uuid
 from pathlib import Path
-from typing import Optional, Dict, List, Tuple
+from typing import Any, Optional, Dict, List, Tuple
 
 logger = logging.getLogger(__name__)
 
@@ -80,14 +80,15 @@ class IngestionResult:
     """Output of the ingestion pipeline — ready for CVBlueprintEngine."""
 
     def __init__(self):
-        self.images: List[np.ndarray] = []          # One per floor/page
+        # Use Any to avoid NameError when numpy/cv2 are not installed
+        self.images: List[Any] = []                  # One per floor/page (np.ndarray when CV2 available)
         self.room_labels: List[Dict[str, str]] = []  # Per-floor OCR label maps
         self.floor_count: int = 0
         self.source_format: str = "unknown"
         self.warnings: List[str] = []
         self.metadata: Dict = {}
 
-    def primary_image(self) -> Optional[np.ndarray]:
+    def primary_image(self) -> Optional[Any]:
         return self.images[0] if self.images else None
 
     def primary_labels(self) -> Dict[str, str]:
@@ -402,7 +403,10 @@ class BlueprintIngestionPipeline:
             n = len(data["text"])
             for i in range(n):
                 text = data["text"][i].strip()
-                conf = int(data["conf"][i])
+                try:
+                    conf = float(data["conf"][i])
+                except (ValueError, TypeError):
+                    continue
                 if not text or conf < 40 or len(text) < 2:
                     continue
 

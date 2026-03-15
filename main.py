@@ -16,6 +16,7 @@ Run:
   uvicorn main:app --reload --host 0.0.0.0 --port 8000
 """
 import logging
+import os
 from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
@@ -25,6 +26,7 @@ from fastapi.responses import JSONResponse
 from src.core.config import settings
 from src.api.routes import blueprints, compliance, predictions, visualization
 from src.api.routes import jobs, projects
+from src.api.middleware.api_key import APIKeyMiddleware, load_api_keys
 from src.storage.outcome_dataset import OutcomeDataset
 from src.storage.graph_store import RegulatoryDesignGraphStore
 from src.storage.job_store import JobStore
@@ -93,13 +95,21 @@ app = FastAPI(
     lifespan=lifespan,
 )
 
-# CORS — allow all origins in development
+# CORS
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+)
+
+# API key auth (off by default for local dev; set REQUIRE_API_KEY=true in prod)
+_require_auth = os.environ.get("REQUIRE_API_KEY", "false").lower() == "true"
+app.add_middleware(
+    APIKeyMiddleware,
+    require_auth=_require_auth,
+    valid_keys=load_api_keys(),
 )
 
 # Register routers
