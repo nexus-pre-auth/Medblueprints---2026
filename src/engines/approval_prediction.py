@@ -389,6 +389,11 @@ class ApprovalPredictionEngine:
         for outcome in outcomes:
             if outcome.approval_result is None:
                 continue
+            # Must match _to_feature_vector column order exactly:
+            # total_rooms, area, critical, high, medium, low,
+            # has_or, has_icu, has_emergency,
+            # or_count, icu_count, corridor_width_min,
+            # ventilation_defs, adjacency_violations, egress_violations, cost
             fv = [
                 outcome.total_rooms,
                 outcome.total_area_sqft / 1000,
@@ -396,10 +401,14 @@ class ApprovalPredictionEngine:
                 outcome.high_violations,
                 outcome.medium_violations,
                 outcome.low_violations,
+                int(outcome.operating_room_count > 0),   # has_operating_rooms
+                int(outcome.icu_bed_count > 0),          # has_icu
+                0,                                        # has_emergency (unknown from outcome)
                 outcome.operating_room_count,
                 outcome.icu_bed_count,
+                8.0,                                      # corridor_width_min_ft (unknown)
+                0, 0, 0,                                  # ventilation/adjacency/egress deficiencies
                 outcome.estimated_correction_cost_usd / 100_000,
-                0, 0, 8.0, 0, 0, 0, 0,  # placeholders for fields not in outcome
             ]
             X.append(fv)
             y.append(1 if outcome.approval_result == "approved" else 0)
