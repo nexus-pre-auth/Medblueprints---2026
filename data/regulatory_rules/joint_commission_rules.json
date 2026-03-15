@@ -1,0 +1,131 @@
+[
+  {
+    "rule_id": "JC_EC_001",
+    "source": "joint_commission",
+    "room_type": "operating_room",
+    "constraint_type": "equipment_required",
+    "description": "Joint Commission EC.02.05.07: Operating rooms must demonstrate backup power capability for all life-safety electrical systems within 10 seconds of normal power failure.",
+    "mandatory": true,
+    "citation": "Joint Commission Standards EC.02.05.07, EP 1"
+  },
+  {
+    "rule_id": "JC_EC_002",
+    "source": "joint_commission",
+    "room_type": "icu",
+    "constraint_type": "equipment_required",
+    "description": "Joint Commission EC.02.05.07: ICU patient care areas must have generator-backed emergency power for all critical patient monitoring and life-support equipment.",
+    "mandatory": true,
+    "citation": "Joint Commission Standards EC.02.05.07"
+  },
+  {
+    "rule_id": "JC_IC_001",
+    "source": "joint_commission",
+    "room_type": "sterile_core",
+    "constraint_type": "equipment_required",
+    "description": "Joint Commission IC.02.02.01: Sterile processing must demonstrate physical separation between decontamination, assembly, and sterile storage areas.",
+    "mandatory": true,
+    "citation": "Joint Commission Standards IC.02.02.01, EP 2"
+  },
+  {
+    "rule_id": "JC_IC_002",
+    "source": "joint_commission",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "Joint Commission IC.02.02.01: Operating suites must demonstrate continuous HVAC monitoring with documented ACH compliance records.",
+    "threshold_value": 20,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "Joint Commission Standards IC.02.02.01, EP 4"
+  },
+  {
+    "rule_id": "JC_IC_003",
+    "source": "joint_commission",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "Joint Commission IC.02.01.01: Airborne infection isolation rooms must have documented negative pressure monitoring with visual indicator at each entrance.",
+    "threshold_value": 12,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "Joint Commission Standards IC.02.01.01, EP 5"
+  },
+  {
+    "rule_id": "JC_LS_001",
+    "source": "joint_commission",
+    "room_type": "corridor",
+    "constraint_type": "egress_required",
+    "description": "Joint Commission LS.02.01.30: All corridors and common areas must be free of storage that reduces the minimum egress width below 8 feet in patient care areas.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "Joint Commission Standards LS.02.01.30"
+  },
+  {
+    "rule_id": "JC_LS_002",
+    "source": "joint_commission",
+    "room_type": "patient_room",
+    "constraint_type": "egress_required",
+    "description": "Joint Commission LS.02.01.20: Each patient room must have a documented egress path with a minimum 3-foot clear doorway and unobstructed path to the corridor.",
+    "threshold_value": 3.0,
+    "threshold_unit": "ft_doorway",
+    "mandatory": true,
+    "citation": "Joint Commission Standards LS.02.01.20"
+  },
+  {
+    "rule_id": "JC_PC_001",
+    "source": "joint_commission",
+    "room_type": "icu",
+    "constraint_type": "adjacency_required",
+    "description": "Joint Commission PC.02.01.19: ICU patient visibility from the nurse station is required; each ICU bed must be directly observable or have electronic monitoring from the central station.",
+    "related_room_type": "nurse_station",
+    "mandatory": true,
+    "citation": "Joint Commission Standards PC.02.01.19"
+  },
+  {
+    "rule_id": "JC_PC_002",
+    "source": "joint_commission",
+    "room_type": "nurse_station",
+    "constraint_type": "adjacency_required",
+    "description": "Joint Commission PC.02.01.19: Medication preparation areas (medication rooms) must be located within or immediately adjacent to the nurse station.",
+    "related_room_type": "patient_room",
+    "mandatory": true,
+    "citation": "Joint Commission Standards PC.02.01.19, EP 3"
+  },
+  {
+    "rule_id": "JC_RI_001",
+    "source": "joint_commission",
+    "room_type": "waiting",
+    "constraint_type": "minimum_area",
+    "description": "Joint Commission RI.01.01.01: Patient waiting areas must provide adequate space to maintain patient privacy during registration and check-in processes.",
+    "threshold_value": 6,
+    "threshold_unit": "sqft_per_seat",
+    "mandatory": false,
+    "citation": "Joint Commission Standards RI.01.01.01"
+  },
+  {
+    "rule_id": "JC_MM_001",
+    "source": "joint_commission",
+    "room_type": "pharmacy",
+    "constraint_type": "separation_required",
+    "description": "Joint Commission MM.01.01.03: Pharmacy must have secured, locked medication storage separate from general storage areas with access restricted to authorized personnel.",
+    "mandatory": true,
+    "citation": "Joint Commission Standards MM.01.01.03"
+  },
+  {
+    "rule_id": "JC_EC_003",
+    "source": "joint_commission",
+    "room_type": "laboratory",
+    "constraint_type": "equipment_required",
+    "description": "Joint Commission EC.02.06.01: Clinical laboratory areas must meet OSHA Bloodborne Pathogen Standard requirements for sharps disposal and biohazard containment.",
+    "mandatory": true,
+    "citation": "Joint Commission Standards EC.02.06.01"
+  },
+  {
+    "rule_id": "JC_HR_001",
+    "source": "joint_commission",
+    "room_type": "nurse_station",
+    "constraint_type": "equipment_required",
+    "description": "Joint Commission EC.02.06.01: Nurse stations and clinical work areas must provide hand hygiene facilities (sink or alcohol-based rub) within the immediate work zone.",
+    "mandatory": true,
+    "citation": "Joint Commission Standards EC.02.06.01, EP 1"
+  }
+]

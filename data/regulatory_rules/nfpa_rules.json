@@ -1,0 +1,145 @@
+[
+  {
+    "rule_id": "NFPA_101_COR_001",
+    "source": "NFPA",
+    "room_type": "corridor",
+    "constraint_type": "minimum_corridor_width",
+    "description": "Corridors used for patient movement in new healthcare occupancies must be a minimum of 8 feet wide.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "NFPA 101:2021, Section 18.2.3.3"
+  },
+  {
+    "rule_id": "NFPA_101_COR_002",
+    "source": "NFPA",
+    "room_type": "corridor",
+    "constraint_type": "egress_required",
+    "description": "All corridors serving as means of egress must remain clear and unobstructed with minimum 8ft width at all times.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "NFPA 101:2021, Section 18.2.3.4"
+  },
+  {
+    "rule_id": "NFPA_101_OR_001",
+    "source": "NFPA",
+    "room_type": "operating_room",
+    "constraint_type": "egress_required",
+    "description": "Operating rooms must have a minimum of two means of egress accessible from the suite.",
+    "mandatory": true,
+    "citation": "NFPA 101:2021, Section 18.2.3"
+  },
+  {
+    "rule_id": "NFPA_101_ICU_001",
+    "source": "NFPA",
+    "room_type": "icu",
+    "constraint_type": "egress_required",
+    "description": "ICU patient areas must be arranged so patients can be evacuated horizontally to adjacent smoke compartments.",
+    "mandatory": true,
+    "citation": "NFPA 101:2021, Section 18.2.3.5"
+  },
+  {
+    "rule_id": "NFPA_101_WAIT_001",
+    "source": "NFPA",
+    "room_type": "waiting",
+    "constraint_type": "minimum_corridor_width",
+    "description": "Waiting areas must have unobstructed egress paths with a minimum clear width of 44 inches.",
+    "threshold_value": 3.67,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "NFPA 101:2021, Section 18.2.3.2"
+  },
+  {
+    "rule_id": "NFPA_99_OR_001",
+    "source": "NFPA",
+    "room_type": "operating_room",
+    "constraint_type": "equipment_required",
+    "description": "Operating rooms must have a dedicated medical gas system with O2, N2O, medical air, CO2, and vacuum outlets meeting NFPA 99 Category 1 requirements.",
+    "mandatory": true,
+    "citation": "NFPA 99:2021, Section 5.1"
+  },
+  {
+    "rule_id": "NFPA_99_ICU_001",
+    "source": "NFPA",
+    "room_type": "icu",
+    "constraint_type": "equipment_required",
+    "description": "ICU patient care areas must have Category 1 medical gas systems including oxygen, medical air, and vacuum at each bed position.",
+    "mandatory": true,
+    "citation": "NFPA 99:2021, Section 5.1.3"
+  },
+  {
+    "rule_id": "NFPA_99_PHARM_001",
+    "source": "NFPA",
+    "room_type": "pharmacy",
+    "constraint_type": "separation_required",
+    "description": "Pharmacy areas handling flammable materials must be separated from other areas by fire-rated construction.",
+    "mandatory": true,
+    "citation": "NFPA 99:2021, Section 8.6"
+  },
+  {
+    "rule_id": "NFPA_99_ER_001",
+    "source": "NFPA",
+    "room_type": "emergency",
+    "constraint_type": "equipment_required",
+    "description": "Emergency department treatment areas must have Category 1 medical gas and electrical systems with emergency power backup.",
+    "mandatory": true,
+    "citation": "NFPA 99:2021, Section 5.1"
+  },
+  {
+    "rule_id": "NFPA_72_ALL_001",
+    "source": "NFPA",
+    "room_type": "patient_room",
+    "constraint_type": "equipment_required",
+    "description": "Patient rooms must be equipped with an addressable fire alarm initiating device (smoke detector or pull station within 200ft).",
+    "mandatory": true,
+    "citation": "NFPA 72:2022, Section 17.7"
+  },
+  {
+    "rule_id": "NFPA_72_OR_001",
+    "source": "NFPA",
+    "room_type": "operating_room",
+    "constraint_type": "equipment_required",
+    "description": "Operating rooms must have smoke detection connected to the building fire alarm system with automatic notification to staff.",
+    "mandatory": true,
+    "citation": "NFPA 72:2022, Section 17.7.3"
+  },
+  {
+    "rule_id": "NFPA_13_STERI_001",
+    "source": "NFPA",
+    "room_type": "sterile_core",
+    "constraint_type": "equipment_required",
+    "description": "Sterile processing areas must be equipped with automatic sprinkler systems per NFPA 13 light hazard occupancy classification.",
+    "mandatory": true,
+    "citation": "NFPA 13:2022, Section 5.2"
+  },
+  {
+    "rule_id": "NFPA_13_LAB_001",
+    "source": "NFPA",
+    "room_type": "laboratory",
+    "constraint_type": "equipment_required",
+    "description": "Clinical laboratories must be equipped with automatic sprinkler systems classified as Ordinary Hazard Group 1 or 2.",
+    "mandatory": true,
+    "citation": "NFPA 13:2022, Section 5.3"
+  },
+  {
+    "rule_id": "NFPA_101_MECH_001",
+    "source": "NFPA",
+    "room_type": "mechanical",
+    "constraint_type": "separation_required",
+    "description": "Mechanical rooms must be separated from occupied areas by minimum 1-hour fire-rated construction.",
+    "mandatory": true,
+    "citation": "NFPA 101:2021, Section 8.7.1"
+  },
+  {
+    "rule_id": "NFPA_101_STAIR_001",
+    "source": "NFPA",
+    "room_type": "corridor",
+    "constraint_type": "egress_required",
+    "description": "Exit stairways must be enclosed in 2-hour fire-rated construction and have minimum 44-inch clear width.",
+    "threshold_value": 3.67,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "NFPA 101:2021, Section 7.2.2.1"
+  }
+]

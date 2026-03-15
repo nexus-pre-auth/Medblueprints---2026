@@ -24,8 +24,11 @@ from fastapi.responses import JSONResponse
 
 from src.core.config import settings
 from src.api.routes import blueprints, compliance, predictions, visualization
+from src.api.routes import jobs, projects
 from src.storage.outcome_dataset import OutcomeDataset
 from src.storage.graph_store import RegulatoryDesignGraphStore
+from src.storage.job_store import JobStore
+from src.storage.project_store import ProjectStore
 
 # Configure logging
 logging.basicConfig(
@@ -37,6 +40,8 @@ logger = logging.getLogger(__name__)
 # Shared singletons
 outcome_dataset = OutcomeDataset()
 design_graph = RegulatoryDesignGraphStore()
+job_store = JobStore()
+project_store = ProjectStore()
 
 
 @asynccontextmanager
@@ -44,9 +49,11 @@ async def lifespan(app: FastAPI):
     """Initialize resources on startup, clean up on shutdown."""
     logger.info("MedBlueprints AI Architecture starting up...")
 
-    # Initialize database tables
+    # Initialize all database tables
     await outcome_dataset.init()
-    logger.info("Outcome dataset ready")
+    await job_store.init()
+    await project_store.init()
+    logger.info("All storage layers ready")
 
     # Attach singletons to app state for access in routes
     app.state.outcome_dataset = outcome_dataset
@@ -100,6 +107,8 @@ app.include_router(blueprints.router, prefix="/api/v1")
 app.include_router(compliance.router, prefix="/api/v1")
 app.include_router(predictions.router, prefix="/api/v1")
 app.include_router(visualization.router, prefix="/api/v1")
+app.include_router(jobs.router, prefix="/api/v1")
+app.include_router(projects.router, prefix="/api/v1")
 
 
 @app.get("/", tags=["health"])
@@ -119,6 +128,15 @@ async def root():
         ],
         "docs": "/docs",
         "openapi": "/openapi.json",
+        "key_endpoints": {
+            "upload_and_analyze": "POST /api/v1/jobs/analyze",
+            "poll_job_status": "GET  /api/v1/jobs/{job_id}",
+            "get_result": "GET  /api/v1/jobs/{job_id}/result",
+            "compliance_analysis": "POST /api/v1/compliance/analyze",
+            "approval_simulation": "POST /api/v1/predictions/simulate",
+            "record_outcome": "POST /api/v1/projects/{id}/outcome",
+            "ar_overlay": "POST /api/v1/visualization/webxr",
+        },
     }
 
 
