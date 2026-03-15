@@ -1,0 +1,145 @@
+[
+  {
+    "rule_id": "ASHRAE_170_OR_001",
+    "source": "ASHRAE",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "ASHRAE 170 requires operating rooms to receive a minimum of 20 total air changes per hour with at least 4 ACH outdoor air.",
+    "threshold_value": 20,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Table 7.1"
+  },
+  {
+    "rule_id": "ASHRAE_170_OR_002",
+    "source": "ASHRAE",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "Operating rooms must maintain positive pressure relative to all adjacent spaces including corridors and sterile cores.",
+    "threshold_value": 4,
+    "threshold_unit": "ACH_OA",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Section 7.2"
+  },
+  {
+    "rule_id": "ASHRAE_170_ICU_001",
+    "source": "ASHRAE",
+    "room_type": "icu",
+    "constraint_type": "minimum_ventilation",
+    "description": "ICU patient rooms require a minimum of 6 total air changes per hour, with at least 2 ACH outdoor air.",
+    "threshold_value": 6,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Table 7.1"
+  },
+  {
+    "rule_id": "ASHRAE_170_ISOL_001",
+    "source": "ASHRAE",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "Airborne infection isolation rooms (AII) must maintain a minimum of 12 ACH and negative pressure of -2.5 Pa relative to corridor.",
+    "threshold_value": 12,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Table 7.1, Row AII"
+  },
+  {
+    "rule_id": "ASHRAE_170_STERI_001",
+    "source": "ASHRAE",
+    "room_type": "sterile_core",
+    "constraint_type": "minimum_ventilation",
+    "description": "Sterile processing and decontamination areas must maintain minimum 10 ACH and negative pressure to prevent contamination spread.",
+    "threshold_value": 10,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Table 7.1"
+  },
+  {
+    "rule_id": "ASHRAE_170_LAB_001",
+    "source": "ASHRAE",
+    "room_type": "laboratory",
+    "constraint_type": "minimum_ventilation",
+    "description": "Clinical laboratories must maintain a minimum of 6 ACH outdoor air and negative pressure relative to adjacent corridors.",
+    "threshold_value": 6,
+    "threshold_unit": "ACH_OA",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Table 7.1"
+  },
+  {
+    "rule_id": "ASHRAE_170_PT_001",
+    "source": "ASHRAE",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "Standard patient rooms must receive a minimum of 2 ACH outdoor air and 4 ACH total supply air.",
+    "threshold_value": 2,
+    "threshold_unit": "ACH_OA",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Table 7.1"
+  },
+  {
+    "rule_id": "ASHRAE_170_ER_001",
+    "source": "ASHRAE",
+    "room_type": "emergency",
+    "constraint_type": "minimum_ventilation",
+    "description": "Emergency department examination/treatment rooms require a minimum of 12 ACH total air supply.",
+    "threshold_value": 12,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Table 7.1"
+  },
+  {
+    "rule_id": "ASHRAE_170_PHARM_001",
+    "source": "ASHRAE",
+    "room_type": "pharmacy",
+    "constraint_type": "minimum_ventilation",
+    "description": "Pharmacy clean rooms (USP 797 compounding) must maintain ISO 7 air quality with minimum 30 ACPH and positive pressure.",
+    "threshold_value": 30,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021 / USP 797"
+  },
+  {
+    "rule_id": "ASHRAE_170_IMG_001",
+    "source": "ASHRAE",
+    "room_type": "imaging",
+    "constraint_type": "minimum_ventilation",
+    "description": "Diagnostic imaging rooms must receive a minimum of 6 ACH total air supply.",
+    "threshold_value": 6,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Table 7.1"
+  },
+  {
+    "rule_id": "ASHRAE_170_WAIT_001",
+    "source": "ASHRAE",
+    "room_type": "waiting",
+    "constraint_type": "minimum_ventilation",
+    "description": "Patient waiting areas must receive a minimum of 2 ACH outdoor air to control infection transmission risk.",
+    "threshold_value": 2,
+    "threshold_unit": "ACH_OA",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Table 7.1"
+  },
+  {
+    "rule_id": "ASHRAE_170_MECH_001",
+    "source": "ASHRAE",
+    "room_type": "mechanical",
+    "constraint_type": "minimum_ventilation",
+    "description": "Mechanical/electrical rooms serving patient care areas must be maintained at neutral or slightly negative pressure.",
+    "threshold_value": 0,
+    "threshold_unit": "Pa_differential",
+    "mandatory": true,
+    "citation": "ASHRAE Standard 170-2021, Section 7.3"
+  },
+  {
+    "rule_id": "ASHRAE_170_NS_001",
+    "source": "ASHRAE",
+    "room_type": "nurse_station",
+    "constraint_type": "minimum_ventilation",
+    "description": "Nurse stations and medication rooms must receive a minimum of 4 ACH to maintain comfortable and safe working conditions.",
+    "threshold_value": 4,
+    "threshold_unit": "ACH",
+    "mandatory": false,
+    "citation": "ASHRAE Standard 170-2021, Table 7.1"
+  }
+]

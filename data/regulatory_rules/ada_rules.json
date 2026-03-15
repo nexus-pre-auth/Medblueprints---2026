@@ -1,0 +1,108 @@
+[
+  {
+    "rule_id": "ADA_PT_001",
+    "source": "ADA",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_area",
+    "description": "Patient rooms must provide a minimum 60-inch diameter turning circle for wheelchair accessibility, exclusive of fixed elements.",
+    "threshold_value": 28.3,
+    "threshold_unit": "sqft_turning_circle",
+    "mandatory": true,
+    "citation": "ADA Standards for Accessible Design, Section 805.4"
+  },
+  {
+    "rule_id": "ADA_WAIT_001",
+    "source": "ADA",
+    "room_type": "waiting",
+    "constraint_type": "minimum_area",
+    "description": "Waiting areas must provide accessible seating with minimum 30 x 48-inch clear floor space adjacent to each accessible seat.",
+    "threshold_value": 10,
+    "threshold_unit": "sqft_per_accessible_seat",
+    "mandatory": true,
+    "citation": "ADA Standards for Accessible Design, Section 802"
+  },
+  {
+    "rule_id": "ADA_COR_001",
+    "source": "ADA",
+    "room_type": "corridor",
+    "constraint_type": "minimum_corridor_width",
+    "description": "Accessible routes in healthcare facilities must maintain a minimum clear width of 36 inches (3 feet), with 44 inches recommended for patient transport.",
+    "threshold_value": 3.0,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "ADA Standards for Accessible Design, Section 403.5"
+  },
+  {
+    "rule_id": "ADA_NS_001",
+    "source": "ADA",
+    "room_type": "nurse_station",
+    "constraint_type": "minimum_area",
+    "description": "Nurse stations and reception areas must provide a portion of the counter with a maximum height of 36 inches and knee clearance.",
+    "threshold_value": 0,
+    "threshold_unit": "accessible_counter_required",
+    "mandatory": true,
+    "citation": "ADA Standards for Accessible Design, Section 904.4"
+  },
+  {
+    "rule_id": "ADA_ICU_001",
+    "source": "ADA",
+    "room_type": "icu",
+    "constraint_type": "minimum_area",
+    "description": "ICU patient bays must provide accessible routes to each bed position, including maneuvering clearance at the foot of the bed.",
+    "threshold_value": 200,
+    "threshold_unit": "sqft",
+    "mandatory": true,
+    "citation": "ADA Standards for Accessible Design, Section 805"
+  },
+  {
+    "rule_id": "ADA_PHARM_001",
+    "source": "ADA",
+    "room_type": "pharmacy",
+    "constraint_type": "minimum_area",
+    "description": "Pharmacy dispensing windows and counters must include an accessible service counter at maximum 36 inches height.",
+    "threshold_value": 0,
+    "threshold_unit": "accessible_counter_required",
+    "mandatory": true,
+    "citation": "ADA Standards for Accessible Design, Section 904.4"
+  },
+  {
+    "rule_id": "ADA_LAB_001",
+    "source": "ADA",
+    "room_type": "laboratory",
+    "constraint_type": "minimum_area",
+    "description": "Laboratory work areas must provide at least 5% of workstations as accessible, with knee clearance and reach range compliance.",
+    "mandatory": true,
+    "citation": "ADA Standards for Accessible Design, Section 902"
+  },
+  {
+    "rule_id": "ADA_IMG_001",
+    "source": "ADA",
+    "room_type": "imaging",
+    "constraint_type": "minimum_area",
+    "description": "Imaging rooms (MRI, CT, X-ray) must provide accessible patient transfer clearance of at least 60 inches on one side of the imaging table.",
+    "threshold_value": 5,
+    "threshold_unit": "ft_clearance",
+    "mandatory": true,
+    "citation": "ADA Standards for Accessible Design, Section 805"
+  },
+  {
+    "rule_id": "ADA_OR_001",
+    "source": "ADA",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_area",
+    "description": "Operating rooms must maintain accessible routes for staff with disabilities, including maneuvering clearance at all workstations.",
+    "mandatory": true,
+    "citation": "ADA Standards for Accessible Design, Section 206.2"
+  },
+  {
+    "rule_id": "ADA_ER_001",
+    "source": "ADA",
+    "room_type": "emergency",
+    "constraint_type": "minimum_corridor_width",
+    "description": "Emergency department treatment rooms must have accessible routes with minimum 5ft x 5ft turning space for wheelchair accessibility.",
+    "threshold_value": 5.0,
+    "threshold_unit": "ft_turning_diameter",
+    "mandatory": true,
+    "citation": "ADA Standards for Accessible Design, Section 805.4"
+  }
+]
