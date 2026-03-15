@@ -1,0 +1,143 @@
+version: "3.9"
+
+# MedBlueprints — Production compose (medblueprints.com)
+#
+# Usage:
+#   cp .env.example .env        # fill in secrets
+#   docker compose -f docker-compose.prod.yml up -d
+#
+# Prerequisites on the server:
+#   - Ports 80 and 443 open in firewall
+#   - DNS A records pointing medblueprints.com + api.medblueprints.com to this server's IP
+#   - .env file with real secrets (see .env.example)
+
+services:
+  # ── Caddy (reverse proxy + auto-TLS) ─────────────────────────────────
+  caddy:
+    image: caddy:2-alpine
+    container_name: medblueprints-caddy
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"   # HTTP/3
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy_data:/data
+      - caddy_config:/config
+      - caddy_logs:/var/log/caddy
+    depends_on:
+      - api
+      - frontend
+    networks:
+      - web
+
+  # ── API (FastAPI) ────────────────────────────────────────────────────
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: medblueprints-api:latest
+    container_name: medblueprints-api
+    restart: unless-stopped
+    expose:
+      - "8000"   # Only exposed to Caddy, not the public internet
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://medblueprints:${POSTGRES_PASSWORD}@db:5432/medblueprints
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY}
+      - CLAUDE_MODEL=${CLAUDE_MODEL:-claude-opus-4-6}
+      - REDIS_URL=redis://redis:6379/0
+      - USE_NEO4J=${USE_NEO4J:-false}
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - REQUIRE_API_KEY=${REQUIRE_API_KEY:-true}
+      - DEMO_API_KEY=${DEMO_API_KEY}
+      - API_KEYS=${API_KEYS:-}
+    volumes:
+      - app_data:/app/data
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    healthcheck:
+      test: ["CMD", "python", "-c", "import httpx; httpx.get('http://localhost:8000/health').raise_for_status()"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - web
+      - internal
+
+  # ── Frontend (Next.js) ───────────────────────────────────────────────
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        - NEXT_PUBLIC_API_URL=https://api.medblueprints.com
+    image: medblueprints-frontend:latest
+    container_name: medblueprints-frontend
+    restart: unless-stopped
+    expose:
+      - "3000"   # Only exposed to Caddy
+    environment:
+      - NEXT_PUBLIC_API_URL=https://api.medblueprints.com
+      - NEXT_PUBLIC_APP_NAME=MedBlueprints
+    depends_on:
+      - api
+    networks:
+      - web
+
+  # ── PostgreSQL ────────────────────────────────────────────────────────
+  db:
+    image: postgres:16-alpine
+    container_name: medblueprints-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=medblueprints
+      - POSTGRES_USER=medblueprints
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./scripts/db_init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    # No port mapping — only reachable from internal network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U medblueprints -d medblueprints"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+  # ── Redis ─────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: medblueprints-redis
+    restart: unless-stopped
+    command: redis-server --requirepass ${REDIS_PASSWORD:-} --save 60 1
+    volumes:
+      - redis_data:/data
+    # No port mapping — internal only
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - internal
+
+volumes:
+  postgres_data:
+  redis_data:
+  app_data:
+  caddy_data:
+  caddy_config:
+  caddy_logs:
+
+networks:
+  web:
+    driver: bridge
+  internal:
+    driver: bridge
+    internal: true   # No outbound internet access from db/redis
