@@ -55,19 +55,6 @@ function RiskTierBadge({ tier }: { tier: string }) {
   );
 }
 
-function StatusBadge({ status }: { status: string }) {
-  const map: Record<string, string> = {
-    draft: "badge-low",
-    analyzing: "badge-medium",
-    reviewed: "badge-high",
-    submitted: "badge-medium",
-    approved: "badge-compliant",
-    rejected: "badge-critical",
-    conditional: "badge-high",
-  };
-  return <span className={map[status] ?? "badge-low"}>{status}</span>;
-}
-
 function deriveRiskTier(score: number | null | undefined): string {
   if (score == null) return "unknown";
   if (score >= 85) return "low";
@@ -122,7 +109,6 @@ export default function DashboardPage() {
 
       {/* Executive KPI cards */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        {/* Total cost at risk */}
         <div className="card border border-red-900/40">
           <div className="flex items-center gap-2 mb-2">
             <DollarSign size={15} className="text-red-400" />
@@ -132,7 +118,6 @@ export default function DashboardPage() {
           <div className="text-gray-500 text-xs mt-1">total correction exposure</div>
         </div>
 
-        {/* High-risk project count */}
         <div className="card border border-orange-900/40">
           <div className="flex items-center gap-2 mb-2">
             <ShieldAlert size={15} className="text-orange-400" />
@@ -144,7 +129,6 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Delay risk */}
         <div className="card border border-yellow-900/40">
           <div className="flex items-center gap-2 mb-2">
             <Clock size={15} className="text-yellow-400" />
@@ -157,7 +141,6 @@ export default function DashboardPage() {
           <div className="text-gray-500 text-xs mt-1">estimated schedule exposure</div>
         </div>
 
-        {/* Avg readiness */}
         <div className="card">
           <div className="flex items-center gap-2 mb-2">
             <TrendingDown size={15} className="text-blue-400" />
@@ -253,7 +236,6 @@ export default function DashboardPage() {
 
         {/* Right column */}
         <div className="space-y-4">
-          {/* Risk tier breakdown */}
           <div className="card">
             <div className="flex items-center gap-2 mb-3">
               <AlertTriangle size={16} className="text-orange-400" />
@@ -294,7 +276,6 @@ export default function DashboardPage() {
             </Link>
           </div>
 
-          {/* Quick actions */}
           <div className="card">
             <h3 className="text-white font-semibold text-sm mb-3">Risk Intelligence Actions</h3>
             <div className="space-y-2">
