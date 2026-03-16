@@ -13,7 +13,8 @@ import logging
 import uuid
 from typing import Optional
 
-from fastapi import APIRouter, File, Form, UploadFile, HTTPException, BackgroundTasks
+from fastapi import APIRouter, File, Form, UploadFile, HTTPException, BackgroundTasks, Request
+from src.core.limiter import limiter
 
 from src.storage.job_store import JobStore, JobStatus
 from src.engines.blueprint_ingestion import BlueprintIngestionPipeline
@@ -21,6 +22,9 @@ from src.engines.pipeline import MedBlueprintsPipeline
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/jobs", tags=["jobs"])
+
+MAX_UPLOAD_BYTES = 50 * 1024 * 1024  # 50 MB
+ALLOWED_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tiff", ".tif", ".pdf", ".dxf"}
 
 # Shared singletons
 _job_store = JobStore()
@@ -139,7 +143,9 @@ async def startup():
 
 
 @router.post("/analyze", summary="Upload blueprint and start async analysis")
+@limiter.limit("10/minute")
 async def submit_blueprint(
+    request: Request,
     background_tasks: BackgroundTasks,
     file: UploadFile = File(None),
     facility_type: str = Form("hospital"),
@@ -168,6 +174,17 @@ async def submit_blueprint(
         file_bytes = await file.read()
         if not file_bytes:
             raise HTTPException(status_code=400, detail="Uploaded file is empty")
+        if len(file_bytes) > MAX_UPLOAD_BYTES:
+            raise HTTPException(
+                status_code=413,
+                detail=f"File too large ({len(file_bytes) // (1024*1024)} MB). Maximum allowed: 50 MB",
+            )
+        ext = "." + filename.lower().rsplit(".", 1)[-1] if "." in filename else ""
+        if ext and ext not in ALLOWED_EXTENSIONS:
+            raise HTTPException(
+                status_code=415,
+                detail=f"Unsupported file type '{ext}'. Allowed: PNG, JPG, BMP, TIFF, PDF, DXF",
+            )
     else:
         raise HTTPException(status_code=400, detail="Provide a file or set use_demo=true")
 

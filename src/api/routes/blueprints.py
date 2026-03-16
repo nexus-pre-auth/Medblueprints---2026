@@ -7,9 +7,10 @@ import logging
 import uuid
 from typing import Optional, Annotated
 
-from fastapi import APIRouter, File, Form, UploadFile, HTTPException, Depends
+from fastapi import APIRouter, File, Form, UploadFile, HTTPException, Depends, Request
 from fastapi.responses import JSONResponse
 import numpy as np
+from src.core.limiter import limiter
 
 from src.engines.cv_blueprint_engine import CVBlueprintEngine
 from src.engines.facility_graph import FacilityGraphEngine
@@ -17,6 +18,13 @@ from src.models.blueprint import BlueprintParseResult
 
 logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/blueprints", tags=["blueprints"])
+
+MAX_UPLOAD_BYTES = 50 * 1024 * 1024  # 50 MB
+ALLOWED_EXTENSIONS = {".png", ".jpg", ".jpeg", ".bmp", ".tiff", ".tif", ".pdf"}
+ALLOWED_CONTENT_TYPES = {
+    "image/png", "image/jpeg", "image/bmp", "image/tiff",
+    "application/pdf",
+}
 
 
 def get_cv_engine() -> CVBlueprintEngine:
@@ -31,7 +39,9 @@ def get_graph_engine() -> FacilityGraphEngine:
 
 
 @router.post("/parse", summary="Parse a blueprint image/PDF")
+@limiter.limit("10/minute")
 async def parse_blueprint(
+    request: Request,
     file: UploadFile = File(None),
     project_id: Optional[str] = Form(None),
     use_demo: bool = Form(False),
@@ -55,6 +65,16 @@ async def parse_blueprint(
     if not file:
         raise HTTPException(status_code=400, detail="Provide a file or set use_demo=true")
 
+    # Validate file type
+    filename_lower = (file.filename or "").lower()
+    ext = "." + filename_lower.rsplit(".", 1)[-1] if "." in filename_lower else ""
+    content_type = (file.content_type or "").split(";")[0].strip()
+    if ext not in ALLOWED_EXTENSIONS and content_type not in ALLOWED_CONTENT_TYPES:
+        raise HTTPException(
+            status_code=415,
+            detail=f"Unsupported file type '{ext or content_type}'. Allowed: PNG, JPG, BMP, TIFF, PDF",
+        )
+
     cv_engine = get_cv_engine()
     if cv_engine is None:
         # Fallback to demo if OpenCV not available
@@ -65,6 +85,11 @@ async def parse_blueprint(
     content = await file.read()
     if not content:
         raise HTTPException(status_code=400, detail="Uploaded file is empty")
+    if len(content) > MAX_UPLOAD_BYTES:
+        raise HTTPException(
+            status_code=413,
+            detail=f"File too large ({len(content) // (1024*1024)} MB). Maximum allowed: 50 MB",
+        )
 
     try:
         arr = np.frombuffer(content, dtype=np.uint8)
