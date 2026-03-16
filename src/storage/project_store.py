@@ -276,6 +276,74 @@ class ProjectStore:
             res = await session.execute(query)
             return [r.to_dict() for r in res.scalars().all()]
 
+    async def portfolio_risk_stats(self) -> Dict[str, Any]:
+        """
+        Aggregate portfolio-level risk intelligence for owners and GCs.
+        Returns financial exposure, delay risk, and project breakdowns by risk tier.
+        """
+        async with self._session_factory() as session:
+            projects_res = await session.execute(
+                select(ProjectRecord).where(
+                    ProjectRecord.submission_readiness_score.is_not(None)
+                ).order_by(ProjectRecord.estimated_correction_cost_usd.desc())
+            )
+            projects = list(projects_res.scalars().all())
+
+        total_cost_exposure = sum(
+            (p.estimated_correction_cost_usd or 0.0) for p in projects
+        )
+
+        # Delay risk: critical violations → ~1.5 weeks each, high → ~0.5 weeks each
+        total_delay_weeks = sum(
+            (p.critical_violations or 0) * 1.5 + (p.high_violations or 0) * 0.5
+            for p in projects
+        )
+
+        # Risk tier from readiness score
+        def risk_tier(score: Optional[float]) -> str:
+            if score is None:
+                return "unknown"
+            if score >= 85:
+                return "low"
+            if score >= 65:
+                return "medium"
+            if score >= 40:
+                return "high"
+            return "very_high"
+
+        tier_counts: Dict[str, int] = {"very_high": 0, "high": 0, "medium": 0, "low": 0, "unknown": 0}
+        tier_exposure: Dict[str, float] = {"very_high": 0.0, "high": 0.0, "medium": 0.0, "low": 0.0, "unknown": 0.0}
+
+        top_risk_projects = []
+        for p in projects:
+            tier = risk_tier(p.submission_readiness_score)
+            tier_counts[tier] = tier_counts.get(tier, 0) + 1
+            tier_exposure[tier] = tier_exposure.get(tier, 0.0) + (p.estimated_correction_cost_usd or 0.0)
+            if tier in ("very_high", "high") and len(top_risk_projects) < 5:
+                top_risk_projects.append({
+                    "project_id": p.id,
+                    "name": p.name,
+                    "facility_type": p.facility_type,
+                    "risk_tier": tier,
+                    "readiness_score": p.submission_readiness_score,
+                    "cost_exposure_usd": p.estimated_correction_cost_usd or 0.0,
+                    "critical_violations": p.critical_violations or 0,
+                    "high_violations": p.high_violations or 0,
+                    "fgi_approval_probability": p.fgi_approval_probability,
+                    "delay_risk_weeks": (p.critical_violations or 0) * 1.5 + (p.high_violations or 0) * 0.5,
+                    "status": p.status,
+                })
+
+        return {
+            "total_projects_analyzed": len(projects),
+            "total_cost_exposure_usd": round(total_cost_exposure, 2),
+            "total_delay_risk_weeks": round(total_delay_weeks, 1),
+            "high_risk_count": tier_counts["very_high"] + tier_counts["high"],
+            "risk_tier_counts": tier_counts,
+            "risk_tier_exposure_usd": {k: round(v, 2) for k, v in tier_exposure.items()},
+            "top_risk_projects": top_risk_projects,
+        }
+
     async def dashboard_stats(self) -> Dict[str, Any]:
         """Aggregate stats for the main dashboard."""
         async with self._session_factory() as session:

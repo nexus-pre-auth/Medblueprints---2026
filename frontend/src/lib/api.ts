@@ -259,3 +259,33 @@ export async function getDesignIntelligence(facilityType?: string) {
 export async function getGraphStats() {
   return apiFetch(`${API_V1}/graph/stats`);
 }
+
+// ── Portfolio Risk ─────────────────────────────────────────────────────
+
+export interface PortfolioRiskProject {
+  project_id: string;
+  name: string;
+  facility_type: string;
+  risk_tier: "very_high" | "high" | "medium" | "low" | "unknown";
+  readiness_score: number | null;
+  cost_exposure_usd: number;
+  critical_violations: number;
+  high_violations: number;
+  fgi_approval_probability: number | null;
+  delay_risk_weeks: number;
+  status: string;
+}
+
+export interface PortfolioRiskStats {
+  total_projects_analyzed: number;
+  total_cost_exposure_usd: number;
+  total_delay_risk_weeks: number;
+  high_risk_count: number;
+  risk_tier_counts: Record<string, number>;
+  risk_tier_exposure_usd: Record<string, number>;
+  top_risk_projects: PortfolioRiskProject[];
+}
+
+export async function getPortfolioRisk(): Promise<PortfolioRiskStats> {
+  return apiFetch(`${API_V1}/projects/portfolio`);
+}

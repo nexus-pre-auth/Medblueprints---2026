@@ -6,19 +6,21 @@ import {
   LayoutDashboard,
   Upload,
   ClipboardCheck,
-  TrendingUp,
+  ShieldAlert,
   Database,
   Settings,
   Layers,
+  BarChart3,
 } from "lucide-react";
 
 const nav = [
-  { href: "/",           label: "Dashboard",      icon: LayoutDashboard },
-  { href: "/upload",     label: "Upload Blueprint", icon: Upload },
-  { href: "/projects",   label: "Projects",         icon: Layers },
-  { href: "/compliance", label: "Compliance",       icon: ClipboardCheck },
-  { href: "/simulate",   label: "Simulate Approval", icon: TrendingUp },
-  { href: "/dataset",    label: "Dataset & Moat",   icon: Database },
+  { href: "/",           label: "Risk Dashboard",    icon: LayoutDashboard },
+  { href: "/portfolio",  label: "Portfolio Risk",    icon: BarChart3 },
+  { href: "/upload",     label: "Analyze Blueprint", icon: Upload },
+  { href: "/projects",   label: "Projects",          icon: Layers },
+  { href: "/compliance", label: "Regulatory Rules",  icon: ClipboardCheck },
+  { href: "/simulate",   label: "Risk Simulator",    icon: ShieldAlert },
+  { href: "/dataset",    label: "Dataset & Moat",    icon: Database },
   { href: "/settings",   label: "Settings",          icon: Settings },
 ];
 
@@ -33,7 +35,7 @@ export function Sidebar() {
           <div className="w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">M</div>
           <span className="font-bold text-white text-sm tracking-tight">MedBlueprints</span>
         </div>
-        <p className="text-gray-500 text-xs mt-1">AI Regulatory Intelligence</p>
+        <p className="text-gray-500 text-xs mt-1">Construction Risk Intelligence</p>
       </div>
 
       {/* Navigation */}

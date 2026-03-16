@@ -65,6 +65,18 @@ async def dashboard():
     return await _store.dashboard_stats()
 
 
+@router.get("/portfolio", summary="Portfolio-level construction risk intelligence")
+async def portfolio_risk():
+    """
+    Owner / GC executive view: aggregate financial exposure, delay risk,
+    and risk tier breakdown across all analyzed projects.
+
+    This is the endpoint for the Construction Risk Intelligence dashboard —
+    showing hospital owners and GCs the total capital at risk before submission.
+    """
+    return await _store.portfolio_risk_stats()
+
+
 @router.get("/{project_id}", summary="Get project details")
 async def get_project(project_id: str):
     project = await _store.get_project(project_id)
