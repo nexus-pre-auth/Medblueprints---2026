@@ -1,0 +1,90 @@
+[
+  {
+    "rule_id": "TX-DSHS-001",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_area",
+    "description": "DSHS: General operating rooms shall have a minimum clear floor area of 360 sq ft, excluding fixed cabinets and built-in shelves.",
+    "threshold_value": 360,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Texas DSHS Health Facility Compliance Rule 25 TAC §133.162"
+  },
+  {
+    "rule_id": "TX-DSHS-002",
+    "source": "state_code",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_area",
+    "description": "DSHS: Single-occupancy patient room minimum 120 sq ft clear floor area; two-bed room minimum 100 sq ft per bed.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Texas DSHS 25 TAC §133.163(b)"
+  },
+  {
+    "rule_id": "TX-DSHS-003",
+    "source": "state_code",
+    "room_type": "icu",
+    "constraint_type": "minimum_area",
+    "description": "DSHS: Intensive care unit bed cubicle minimum 150 sq ft clear floor area per patient space.",
+    "threshold_value": 150,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Texas DSHS 25 TAC §133.163(c)"
+  },
+  {
+    "rule_id": "TX-DSHS-004",
+    "source": "state_code",
+    "room_type": "emergency_department",
+    "constraint_type": "minimum_area",
+    "description": "DSHS: Emergency treatment spaces minimum 100 sq ft per treatment bay in licensed emergency departments.",
+    "threshold_value": 100,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Texas DSHS 25 TAC §133.163"
+  },
+  {
+    "rule_id": "TX-DSHS-005",
+    "source": "state_code",
+    "room_type": "corridor",
+    "constraint_type": "minimum_corridor_width",
+    "description": "DSHS: Corridors in patient care areas minimum 8 ft clear width; service corridors minimum 6 ft clear width.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "Texas DSHS 25 TAC §133.162 / NFPA 101"
+  },
+  {
+    "rule_id": "TX-DSHS-006",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "DSHS: Surgical suites require 15 ACH total, 3 ACH outside air minimum, with positive pressure and HEPA filtration.",
+    "threshold_value": 15,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "Texas DSHS / ASHRAE 170-2017 as adopted"
+  },
+  {
+    "rule_id": "TX-DSHS-007",
+    "source": "state_code",
+    "room_type": "nursery",
+    "constraint_type": "minimum_area",
+    "description": "DSHS: Newborn nursery minimum 40 sq ft per bassinet in well-baby nurseries, 60 sq ft per infant space in Level II/III NICUs.",
+    "threshold_value": 40,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Texas DSHS 25 TAC §133.163(d)"
+  },
+  {
+    "rule_id": "TX-DSHS-008",
+    "source": "state_code",
+    "room_type": "dialysis_unit",
+    "constraint_type": "minimum_area",
+    "description": "DSHS: Hemodialysis treatment station minimum 80 sq ft clear floor area per station.",
+    "threshold_value": 80,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Texas DSHS 25 TAC §133"
+  }
+]

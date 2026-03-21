@@ -1,0 +1,110 @@
+[
+  {
+    "rule_id": "CA-OSHPD-001",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_area",
+    "description": "OSHPD: Operating rooms for general surgery shall have a minimum clear floor area of 400 sq ft, excluding fixed or wall-mounted cabinets and built-in shelves.",
+    "threshold_value": 400,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "California OSHPD SOP 3.2.1 / Title 22 CCR §70831"
+  },
+  {
+    "rule_id": "CA-OSHPD-002",
+    "source": "state_code",
+    "room_type": "cardiac_cath_lab",
+    "constraint_type": "minimum_area",
+    "description": "OSHPD: Cardiac catheterization lab minimum clear floor area 600 sq ft with seismic bracing for all ceiling-mounted equipment.",
+    "threshold_value": 600,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "California OSHPD SOP 3.4.1 / Title 22 CCR §70831"
+  },
+  {
+    "rule_id": "CA-OSHPD-003",
+    "source": "state_code",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_area",
+    "description": "OSHPD: Single-bed patient room minimum 150 sq ft clear floor area; multi-bed rooms 120 sq ft per bed.",
+    "threshold_value": 150,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "California OSHPD SOP 2.1 / Title 22 CCR §70729"
+  },
+  {
+    "rule_id": "CA-OSHPD-004",
+    "source": "state_code",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "OSHPD: Patient rooms require a minimum 6 ACH total airflow, 2 ACH outside air, per ASHRAE 170 as adopted by California.",
+    "threshold_value": 6,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "California OSHPD SOP / ASHRAE 170-2021 as adopted"
+  },
+  {
+    "rule_id": "CA-OSHPD-005",
+    "source": "state_code",
+    "room_type": "icu",
+    "constraint_type": "minimum_area",
+    "description": "OSHPD: ICU patient cubicle minimum 200 sq ft clear floor area, with seismic anchorage of all equipment.",
+    "threshold_value": 200,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "California OSHPD SOP 4.1 / Title 22 CCR §70737"
+  },
+  {
+    "rule_id": "CA-OSHPD-006",
+    "source": "state_code",
+    "room_type": "emergency_department",
+    "constraint_type": "minimum_area",
+    "description": "OSHPD: Emergency treatment room minimum 120 sq ft clear floor area per treatment space.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "California OSHPD SOP / Title 22 CCR §70413"
+  },
+  {
+    "rule_id": "CA-OSHPD-007",
+    "source": "state_code",
+    "room_type": "corridor",
+    "constraint_type": "minimum_corridor_width",
+    "description": "OSHPD: Patient care corridors minimum 8 ft clear width; cross-corridors and exit corridors serving as egress paths minimum 8 ft.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "California OSHPD Title 24 / NFPA 101"
+  },
+  {
+    "rule_id": "CA-OSHPD-008",
+    "source": "state_code",
+    "room_type": "all",
+    "constraint_type": "equipment_required",
+    "description": "OSHPD: All new hospital construction must comply with California seismic regulations; all equipment must be anchored per CBC Chapter 16A.",
+    "mandatory": true,
+    "citation": "California Building Code Chapter 16A — Essential Services Buildings"
+  },
+  {
+    "rule_id": "CA-OSHPD-009",
+    "source": "state_code",
+    "room_type": "pharmacy",
+    "constraint_type": "minimum_area",
+    "description": "OSHPD: Inpatient pharmacy with sterile compounding area minimum 400 sq ft, with ISO Class 7 anteroom and ISO Class 5 primary engineering control.",
+    "threshold_value": 400,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "California Board of Pharmacy / OSHPD SOP"
+  },
+  {
+    "rule_id": "CA-OSHPD-010",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "OSHPD: Operating rooms require minimum 20 ACH total airflow, 4 ACH outside air, HEPA-filtered supply, positive pressure differential.",
+    "threshold_value": 20,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "California OSHPD SOP / ASHRAE 170-2021 §7.1"
+  }
+]

@@ -29,7 +29,7 @@ from src.core.limiter import limiter
 
 from src.core.config import settings
 from src.api.routes import blueprints, compliance, predictions, visualization
-from src.api.routes import jobs, projects
+from src.api.routes import jobs, projects, states
 from src.api.middleware.api_key import APIKeyMiddleware, load_api_keys
 from src.storage.outcome_dataset import OutcomeDataset
 from src.storage.graph_store import RegulatoryDesignGraphStore
@@ -86,6 +86,7 @@ app = FastAPI(
 | 5 | Approval Prediction Model | Estimate submission readiness and approval probability |
 | 6 | AR Visualization Engine | Spatial compliance overlays for WebXR/Vision Pro |
 | 7 | Outcome Dataset | Strategic moat: every project's design + outcome |
+| 8 | State Regulatory Feed Engine | Per-state rules for all 50 states + DC feeding Medblueprints.com |
 
 ### Quick Start
 
@@ -94,6 +95,8 @@ app = FastAPI(
 3. **Simulate approval**: `POST /predictions/simulate`
 4. **Generate AR overlay**: `POST /visualization/webxr`
 5. **Record outcome**: `POST /predictions/outcomes/record` (builds the moat)
+6. **National state feed**: `GET /states/` — all 50 states feeding Medblueprints.com
+7. **State rules**: `GET /states/{state}/rules` — e.g. `/states/CA/rules`
     """,
     version="1.0.0",
     lifespan=lifespan,
@@ -128,6 +131,7 @@ app.include_router(predictions.router, prefix="/api/v1")
 app.include_router(visualization.router, prefix="/api/v1")
 app.include_router(jobs.router, prefix="/api/v1")
 app.include_router(projects.router, prefix="/api/v1")
+app.include_router(states.router, prefix="/api/v1")
 
 
 @app.get("/", tags=["health"])
@@ -144,6 +148,7 @@ async def root():
             "Approval Prediction Model",
             "AR Visualization Engine (WebXR + Vision Pro + SVG)",
             "Outcome Dataset + Regulatory Design Graph",
+            "State Regulatory Feed Engine (50 states + DC)",
         ],
         "docs": "/docs",
         "openapi": "/openapi.json",
@@ -155,6 +160,10 @@ async def root():
             "approval_simulation": "POST /api/v1/predictions/simulate",
             "record_outcome": "POST /api/v1/projects/{id}/outcome",
             "ar_overlay": "POST /api/v1/visualization/webxr",
+            "national_state_feed": "GET  /api/v1/states/",
+            "state_rules": "GET  /api/v1/states/{state}/rules",
+            "state_compliance_stack": "GET  /api/v1/states/{state}/compliance-stack",
+            "state_analyze": "POST /api/v1/states/{state}/analyze",
         },
     }
 
