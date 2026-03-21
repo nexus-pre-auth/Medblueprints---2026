@@ -1,0 +1,88 @@
+[
+  {
+    "rule_id": "OH-ODH-001",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_area",
+    "description": "ODH: General operating rooms minimum 360 sq ft net clear floor area; cardiovascular and orthopedic ORs minimum 450 sq ft.",
+    "threshold_value": 360,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Ohio Administrative Code §3701-83-16 / ODH Hospital Rules"
+  },
+  {
+    "rule_id": "OH-ODH-002",
+    "source": "state_code",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_area",
+    "description": "ODH: Single-bed patient room minimum 120 sq ft clear floor area; two-bed rooms minimum 100 sq ft per bed.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Ohio Admin Code §3701-83-16"
+  },
+  {
+    "rule_id": "OH-ODH-003",
+    "source": "state_code",
+    "room_type": "icu",
+    "constraint_type": "minimum_area",
+    "description": "ODH: ICU patient cubicle minimum 150 sq ft clear; open-bay ICU minimum 120 sq ft per patient.",
+    "threshold_value": 150,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Ohio Admin Code §3701-83-16"
+  },
+  {
+    "rule_id": "OH-ODH-004",
+    "source": "state_code",
+    "room_type": "emergency_department",
+    "constraint_type": "minimum_area",
+    "description": "ODH: Emergency treatment spaces minimum 120 sq ft per space; at least one trauma bay minimum 200 sq ft.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Ohio Admin Code §3701-83-16"
+  },
+  {
+    "rule_id": "OH-ODH-005",
+    "source": "state_code",
+    "room_type": "corridor",
+    "constraint_type": "minimum_corridor_width",
+    "description": "ODH: Patient care corridors minimum 8 ft clear width; service corridors minimum 6 ft.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "Ohio Admin Code / NFPA 101"
+  },
+  {
+    "rule_id": "OH-ODH-006",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "ODH: Operating rooms require minimum 20 ACH total, 4 ACH outside air, positive pressure, HEPA-filtered supply.",
+    "threshold_value": 20,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "Ohio Admin Code / ASHRAE 170-2021"
+  },
+  {
+    "rule_id": "OH-ODH-007",
+    "source": "state_code",
+    "room_type": "all",
+    "constraint_type": "equipment_required",
+    "description": "ODH: New hospitals and major renovations require ODH Certificate of Need review; ODH plan review required for all licensed health facilities.",
+    "mandatory": true,
+    "citation": "Ohio Revised Code §3702.51 — Certificate of Need"
+  },
+  {
+    "rule_id": "OH-ODH-008",
+    "source": "state_code",
+    "room_type": "psychiatric_unit",
+    "constraint_type": "minimum_area",
+    "description": "ODH: Psychiatric inpatient unit individual bedroom minimum 100 sq ft; day room minimum 35 sq ft per licensed patient.",
+    "threshold_value": 100,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "Ohio Admin Code §5122-14-01"
+  }
+]

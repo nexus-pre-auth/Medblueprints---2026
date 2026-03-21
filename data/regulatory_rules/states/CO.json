@@ -1,0 +1,86 @@
+[
+  {
+    "rule_id": "CO-CDPHE-001",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_area",
+    "description": "CDPHE: General operating rooms minimum 360 sq ft net clear floor area per FGI 2022 as adopted by Colorado.",
+    "threshold_value": 360,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "6 CCR 1011-1 / Colorado Department of Public Health and Environment"
+  },
+  {
+    "rule_id": "CO-CDPHE-002",
+    "source": "state_code",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_area",
+    "description": "CDPHE: Single-bed patient room minimum 120 sq ft clear; two-bed room minimum 100 sq ft per patient.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "6 CCR 1011-1"
+  },
+  {
+    "rule_id": "CO-CDPHE-003",
+    "source": "state_code",
+    "room_type": "icu",
+    "constraint_type": "minimum_area",
+    "description": "CDPHE: ICU cubicle minimum 150 sq ft clear; open-bay ICU minimum 120 sq ft per patient.",
+    "threshold_value": 150,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "6 CCR 1011-1"
+  },
+  {
+    "rule_id": "CO-CDPHE-004",
+    "source": "state_code",
+    "room_type": "emergency_department",
+    "constraint_type": "minimum_area",
+    "description": "CDPHE: Emergency treatment rooms minimum 120 sq ft per treatment space.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "6 CCR 1011-1"
+  },
+  {
+    "rule_id": "CO-CDPHE-005",
+    "source": "state_code",
+    "room_type": "corridor",
+    "constraint_type": "minimum_corridor_width",
+    "description": "CDPHE: Patient care corridors minimum 8 ft clear width per NFPA 101.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "6 CCR 1011-1 / NFPA 101"
+  },
+  {
+    "rule_id": "CO-CDPHE-006",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "CDPHE: Operating rooms 20 ACH total, 4 ACH outside air, positive pressure, HEPA-filtered.",
+    "threshold_value": 20,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "6 CCR 1011-1 / ASHRAE 170"
+  },
+  {
+    "rule_id": "CO-CDPHE-007",
+    "source": "state_code",
+    "room_type": "all",
+    "constraint_type": "equipment_required",
+    "description": "CDPHE: Colorado does NOT have a Certificate of Need law. All hospital construction requires CDPHE Health Facilities and Emergency Medical Services Division plan review.",
+    "mandatory": true,
+    "citation": "Colorado — No CON / 6 CCR 1011-1"
+  },
+  {
+    "rule_id": "CO-CDPHE-008",
+    "source": "state_code",
+    "room_type": "all",
+    "constraint_type": "equipment_required",
+    "description": "CDPHE: High-altitude construction in Colorado may require additional HVAC design considerations; altitude >5,000 ft affects ACH calculations and outdoor air volume.",
+    "mandatory": false,
+    "citation": "Colorado High-Altitude HVAC Design Guidelines / ASHRAE High-Altitude Supplement"
+  }
+]

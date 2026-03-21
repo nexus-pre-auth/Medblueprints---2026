@@ -1,0 +1,77 @@
+[
+  {
+    "rule_id": "IN-ISDH-001",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_area",
+    "description": "ISDH: General operating rooms minimum 360 sq ft net clear floor area per FGI 2022 as adopted by Indiana.",
+    "threshold_value": 360,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "410 IAC 15-1 / Indiana State Department of Health"
+  },
+  {
+    "rule_id": "IN-ISDH-002",
+    "source": "state_code",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_area",
+    "description": "ISDH: Single-bed patient room minimum 120 sq ft clear; two-bed rooms minimum 100 sq ft per patient.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "410 IAC 15-1"
+  },
+  {
+    "rule_id": "IN-ISDH-003",
+    "source": "state_code",
+    "room_type": "icu",
+    "constraint_type": "minimum_area",
+    "description": "ISDH: ICU cubicle minimum 150 sq ft; open-bay ICU minimum 120 sq ft per patient.",
+    "threshold_value": 150,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "410 IAC 15-1"
+  },
+  {
+    "rule_id": "IN-ISDH-004",
+    "source": "state_code",
+    "room_type": "emergency_department",
+    "constraint_type": "minimum_area",
+    "description": "ISDH: Emergency treatment rooms minimum 120 sq ft per treatment space.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "410 IAC 15-1"
+  },
+  {
+    "rule_id": "IN-ISDH-005",
+    "source": "state_code",
+    "room_type": "corridor",
+    "constraint_type": "minimum_corridor_width",
+    "description": "ISDH: Patient care corridors minimum 8 ft clear width.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "410 IAC 15-1 / NFPA 101"
+  },
+  {
+    "rule_id": "IN-ISDH-006",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "ISDH: Surgical suites 20 ACH total, 4 ACH outside air, positive pressure, HEPA-filtered.",
+    "threshold_value": 20,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "410 IAC 15-1 / ASHRAE 170"
+  },
+  {
+    "rule_id": "IN-ISDH-007",
+    "source": "state_code",
+    "room_type": "all",
+    "constraint_type": "equipment_required",
+    "description": "ISDH: Indiana does not have a Certificate of Need law. Hospital construction requires ISDH plan review and licensing approval. Indiana is a free-market state for healthcare construction.",
+    "mandatory": true,
+    "citation": "Indiana Code §16-21 / ISDH Hospital Licensing"
+  }
+]

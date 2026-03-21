@@ -1,0 +1,86 @@
+[
+  {
+    "rule_id": "MD-OHCQ-001",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_area",
+    "description": "MD OHCQ: General operating rooms minimum 400 sq ft net clear floor area per FGI 2022 as adopted by Maryland.",
+    "threshold_value": 400,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "COMAR 10.07.01 / Maryland Office of Health Care Quality"
+  },
+  {
+    "rule_id": "MD-OHCQ-002",
+    "source": "state_code",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_area",
+    "description": "MD OHCQ: Single-bed patient room minimum 130 sq ft clear; two-bed rooms minimum 110 sq ft per patient.",
+    "threshold_value": 130,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "COMAR 10.07.01"
+  },
+  {
+    "rule_id": "MD-OHCQ-003",
+    "source": "state_code",
+    "room_type": "icu",
+    "constraint_type": "minimum_area",
+    "description": "MD OHCQ: ICU cubicle minimum 200 sq ft clear; open-bay ICU minimum 150 sq ft per patient.",
+    "threshold_value": 200,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "COMAR 10.07.01"
+  },
+  {
+    "rule_id": "MD-OHCQ-004",
+    "source": "state_code",
+    "room_type": "emergency_department",
+    "constraint_type": "minimum_area",
+    "description": "MD OHCQ: Emergency treatment rooms minimum 130 sq ft per treatment space.",
+    "threshold_value": 130,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "COMAR 10.07.01"
+  },
+  {
+    "rule_id": "MD-OHCQ-005",
+    "source": "state_code",
+    "room_type": "corridor",
+    "constraint_type": "minimum_corridor_width",
+    "description": "MD OHCQ: Patient care corridors minimum 8 ft clear width.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "COMAR 10.07.01 / NFPA 101"
+  },
+  {
+    "rule_id": "MD-OHCQ-006",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "MD OHCQ: Surgical suites 20 ACH total, 4 ACH outside air, positive pressure, HEPA-filtered.",
+    "threshold_value": 20,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "COMAR 10.07.01 / ASHRAE 170"
+  },
+  {
+    "rule_id": "MD-OHCQ-007",
+    "source": "state_code",
+    "room_type": "all",
+    "constraint_type": "equipment_required",
+    "description": "MD OHCQ: Certificate of Need required from Maryland Health Care Commission (MHCC) for all new hospital construction, beds, and services. Maryland is a strict CON state.",
+    "mandatory": true,
+    "citation": "Maryland Health-General Article §19-101 — Maryland Health Care Commission CON"
+  },
+  {
+    "rule_id": "MD-OHCQ-008",
+    "source": "state_code",
+    "room_type": "all",
+    "constraint_type": "equipment_required",
+    "description": "MD OHCQ: All new hospital construction plans require plan review and approval by Maryland OHCQ prior to construction. Inspection required at substantial completion.",
+    "mandatory": true,
+    "citation": "COMAR 10.07.01.06 — Maryland Plan Review Process"
+  }
+]

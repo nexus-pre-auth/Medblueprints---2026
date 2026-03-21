@@ -1,0 +1,86 @@
+[
+  {
+    "rule_id": "VA-VDH-001",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_area",
+    "description": "VDH: General operating rooms minimum 360 sq ft net clear floor area per FGI 2022 as adopted by Virginia.",
+    "threshold_value": 360,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "12 VAC 5-410 / Virginia Department of Health Hospital Regulations"
+  },
+  {
+    "rule_id": "VA-VDH-002",
+    "source": "state_code",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_area",
+    "description": "VDH: Single-bed patient room minimum 120 sq ft clear; two-bed room minimum 100 sq ft per patient.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "12 VAC 5-410-770"
+  },
+  {
+    "rule_id": "VA-VDH-003",
+    "source": "state_code",
+    "room_type": "icu",
+    "constraint_type": "minimum_area",
+    "description": "VDH: ICU cubicle minimum 150 sq ft; open-bay ICU minimum 120 sq ft per patient.",
+    "threshold_value": 150,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "12 VAC 5-410"
+  },
+  {
+    "rule_id": "VA-VDH-004",
+    "source": "state_code",
+    "room_type": "emergency_department",
+    "constraint_type": "minimum_area",
+    "description": "VDH: Emergency treatment rooms minimum 120 sq ft per treatment space.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "12 VAC 5-410"
+  },
+  {
+    "rule_id": "VA-VDH-005",
+    "source": "state_code",
+    "room_type": "corridor",
+    "constraint_type": "minimum_corridor_width",
+    "description": "VDH: Patient care corridors minimum 8 ft clear width per NFPA 101.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "12 VAC 5-410 / NFPA 101"
+  },
+  {
+    "rule_id": "VA-VDH-006",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "VDH: Surgical suites 20 ACH total, 4 ACH outside air, positive pressure, HEPA-filtered.",
+    "threshold_value": 20,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "12 VAC 5-410 / ASHRAE 170"
+  },
+  {
+    "rule_id": "VA-VDH-007",
+    "source": "state_code",
+    "room_type": "all",
+    "constraint_type": "equipment_required",
+    "description": "VDH: New hospital and outpatient surgery center construction requires Certificate of Public Need (COPN) from VDH prior to construction. Virginia is a COPN state.",
+    "mandatory": true,
+    "citation": "Virginia Code §32.1-102 — Certificate of Public Need"
+  },
+  {
+    "rule_id": "VA-VDH-008",
+    "source": "state_code",
+    "room_type": "all",
+    "constraint_type": "equipment_required",
+    "description": "VDH: All licensed hospital plans must be reviewed and approved by VDH Office of Licensure and Certification prior to construction start.",
+    "mandatory": true,
+    "citation": "12 VAC 5-410-60 / VDH OLC Plan Review"
+  }
+]

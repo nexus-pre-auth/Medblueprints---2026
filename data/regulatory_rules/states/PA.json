@@ -1,0 +1,88 @@
+[
+  {
+    "rule_id": "PA-DOH-001",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_area",
+    "description": "PA DOH: General operating rooms minimum 360 sq ft net clear floor area, exclusive of fixed or built-in cabinets and shelves.",
+    "threshold_value": 360,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "28 Pa. Code §51.3 / PA DOH Guidelines for Design and Construction of Hospitals"
+  },
+  {
+    "rule_id": "PA-DOH-002",
+    "source": "state_code",
+    "room_type": "patient_room",
+    "constraint_type": "minimum_area",
+    "description": "PA DOH: Single-bed patient room minimum 120 sq ft clear floor area; multi-bed rooms minimum 100 sq ft per patient.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "28 Pa. Code §51.3 / PA DOH"
+  },
+  {
+    "rule_id": "PA-DOH-003",
+    "source": "state_code",
+    "room_type": "icu",
+    "constraint_type": "minimum_area",
+    "description": "PA DOH: Intensive care cubicle minimum 150 sq ft clear floor area; open-plan ICU bay minimum 120 sq ft per patient.",
+    "threshold_value": 150,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "28 Pa. Code §51.3"
+  },
+  {
+    "rule_id": "PA-DOH-004",
+    "source": "state_code",
+    "room_type": "emergency_department",
+    "constraint_type": "minimum_area",
+    "description": "PA DOH: Emergency treatment rooms minimum 120 sq ft per treatment space; trauma bays minimum 250 sq ft.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "28 Pa. Code §117.52"
+  },
+  {
+    "rule_id": "PA-DOH-005",
+    "source": "state_code",
+    "room_type": "corridor",
+    "constraint_type": "minimum_corridor_width",
+    "description": "PA DOH: Patient care corridors minimum 8 ft clear width per NFPA 101 as adopted.",
+    "threshold_value": 8,
+    "threshold_unit": "ft",
+    "mandatory": true,
+    "citation": "28 Pa. Code / NFPA 101"
+  },
+  {
+    "rule_id": "PA-DOH-006",
+    "source": "state_code",
+    "room_type": "operating_room",
+    "constraint_type": "minimum_ventilation",
+    "description": "PA DOH: Surgical suites require 20 ACH total, 4 ACH outside air, positive pressure, HEPA filtration.",
+    "threshold_value": 20,
+    "threshold_unit": "ACH",
+    "mandatory": true,
+    "citation": "28 Pa. Code / ASHRAE 170-2021"
+  },
+  {
+    "rule_id": "PA-DOH-007",
+    "source": "state_code",
+    "room_type": "all",
+    "constraint_type": "equipment_required",
+    "description": "PA DOH: New hospital construction and renovation over $1M requires PA Department of Health plan review and approval prior to construction.",
+    "mandatory": true,
+    "citation": "Pennsylvania Health Care Facilities Act (35 P.S. §448.101)"
+  },
+  {
+    "rule_id": "PA-DOH-008",
+    "source": "state_code",
+    "room_type": "nicu",
+    "constraint_type": "minimum_area",
+    "description": "PA DOH: NICU each infant care space minimum 120 sq ft per FGI guidelines as adopted; private NICU room minimum 150 sq ft.",
+    "threshold_value": 120,
+    "threshold_unit": "sq_ft",
+    "mandatory": true,
+    "citation": "28 Pa. Code §51.3 / FGI 2022"
+  }
+]
