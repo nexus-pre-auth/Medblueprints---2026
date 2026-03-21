@@ -34,6 +34,7 @@ pandas==2.2.3
 # Storage and serialization
 sqlalchemy==2.0.35
 aiosqlite==0.20.0
+asyncpg==0.29.0
 aiofiles==24.1.0
 
 # PDF and CAD processing

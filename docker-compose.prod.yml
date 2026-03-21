@@ -53,7 +53,9 @@ services:
       - DEMO_API_KEY=${DEMO_API_KEY}
       - API_KEYS=${API_KEYS:-}
     volumes:
-      - app_data:/app/data
+      # Only persist mutable outputs — NOT /app/data wholesale, which would
+      # shadow the regulatory rule JSON files baked into the image.
+      - app_ar_outputs:/app/data/ar_outputs
     depends_on:
       db:
         condition: service_healthy
@@ -130,7 +132,7 @@ services:
 volumes:
   postgres_data:
   redis_data:
-  app_data:
+  app_ar_outputs:
   caddy_data:
   caddy_config:
   caddy_logs:

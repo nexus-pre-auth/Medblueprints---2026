@@ -47,8 +47,8 @@ COPY --from=builder /install /usr/local
 # Copy application code
 COPY . .
 
-# Create data directories
-RUN mkdir -p data/ar_outputs data/regulatory_rules data/sample_blueprints
+# Create data directories (state rules are COPY-ed in; just ensure subdirs exist)
+RUN mkdir -p data/ar_outputs data/regulatory_rules/states data/sample_blueprints
 
 # Non-root user for security
 RUN useradd --create-home --shell /bin/bash medblueprints && \
