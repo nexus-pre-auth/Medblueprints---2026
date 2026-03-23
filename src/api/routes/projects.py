@@ -4,7 +4,7 @@ Projects API — Full Project Lifecycle
 import logging
 from typing import Optional
 
-from fastapi import APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query, Request
 from pydantic import BaseModel
 
 from src.storage.project_store import ProjectStore
@@ -75,6 +75,32 @@ async def portfolio_risk():
     showing hospital owners and GCs the total capital at risk before submission.
     """
     return await _store.portfolio_risk_stats()
+
+
+@router.post("/{project_id}/share", summary="Generate a shareable report link")
+async def create_share_link(project_id: str, request: Request):
+    """
+    Generate a public share token for this project's compliance report.
+    The returned URL can be sent to compliance officers or owners without login.
+    """
+    project = await _store.get_project(project_id)
+    if not project:
+        raise HTTPException(status_code=404, detail="Project not found")
+    try:
+        token = await _store.generate_share_token(project_id)
+    except ValueError as e:
+        raise HTTPException(status_code=404, detail=str(e))
+    base = str(request.base_url).rstrip("/")
+    return {"share_token": token, "share_url": f"{base}/share/{token}"}
+
+
+@router.get("/share/{token}", summary="Fetch shared report by token (public)")
+async def get_shared_report(token: str):
+    """Public endpoint — no API key required. Returns project data for the share page."""
+    project = await _store.get_project_by_share_token(token)
+    if not project:
+        raise HTTPException(status_code=404, detail="Shared report not found or link has expired")
+    return {"project": project, "job_id": project.get("latest_job_id")}
 
 
 @router.get("/{project_id}", summary="Get project details")

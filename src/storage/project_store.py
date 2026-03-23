@@ -17,6 +17,7 @@ This is the primary business object — the "deal" in the sales pipeline.
 """
 import json
 import logging
+import secrets
 import uuid
 from datetime import datetime, timezone
 from typing import Optional, List, Dict, Any
@@ -73,6 +74,9 @@ class ProjectRecord(Base):
     approval_regulator: Mapped[Optional[str]] = mapped_column(String, nullable=True)
     review_duration_days: Mapped[Optional[int]] = mapped_column(Integer, nullable=True)
     actual_rework_cost_usd: Mapped[Optional[float]] = mapped_column(Float, nullable=True)
+
+    # Shareable report link
+    share_token: Mapped[Optional[str]] = mapped_column(String, nullable=True, index=True, unique=True)
 
     # Team / org
     owner_email: Mapped[Optional[str]] = mapped_column(String, nullable=True)
@@ -254,6 +258,25 @@ class ProjectStore:
                 record.updated_at = datetime.now(timezone.utc)
                 await session.commit()
         logger.info("Recorded outcome for project %s: %s", project_id, approval_result)
+
+    async def generate_share_token(self, project_id: str) -> str:
+        """Generate (or return existing) share token for a project."""
+        async with self._session_factory() as session:
+            res = await session.execute(select(ProjectRecord).where(ProjectRecord.id == project_id))
+            record = res.scalar_one_or_none()
+            if not record:
+                raise ValueError(f"Project {project_id} not found")
+            if not record.share_token:
+                record.share_token = secrets.token_urlsafe(16)
+                record.updated_at = datetime.now(timezone.utc)
+                await session.commit()
+            return record.share_token
+
+    async def get_project_by_share_token(self, token: str) -> Optional[Dict[str, Any]]:
+        async with self._session_factory() as session:
+            res = await session.execute(select(ProjectRecord).where(ProjectRecord.share_token == token))
+            record = res.scalar_one_or_none()
+            return record.to_dict() if record else None
 
     async def get_project(self, project_id: str) -> Optional[Dict[str, Any]]:
         async with self._session_factory() as session:

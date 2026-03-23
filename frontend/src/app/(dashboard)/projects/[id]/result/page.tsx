@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams, useRouter } from "next/navigation";
-import { getJobResult, getProject, recordOutcome } from "@/lib/api";
+import { getJobResult, getProject, recordOutcome, shareProject } from "@/lib/api";
 import type { AnalysisResult, Project } from "@/lib/api";
 import {
   CheckCircle,
@@ -16,6 +16,7 @@ import {
   Clock,
   ChevronDown,
   ChevronUp,
+  Share2,
 } from "lucide-react";
 
 const SEVERITY_COLOR: Record<string, string> = {
@@ -173,6 +174,8 @@ export default function ResultPage() {
   const [activeTab, setActiveTab] = useState<"overview" | "compliance" | "prediction" | "ar">("overview");
   const [recordingOutcome, setRecordingOutcome] = useState(false);
   const [outcomeRecorded, setOutcomeRecorded] = useState(false);
+  const [sharing, setSharing] = useState(false);
+  const [shareCopied, setShareCopied] = useState(false);
 
   useEffect(() => {
     if (!jobId) { setError("No job ID in URL"); setLoading(false); return; }
@@ -187,6 +190,20 @@ export default function ResultPage() {
       .catch((e) => setError((e as Error).message))
       .finally(() => setLoading(false));
   }, [jobId, id]);
+
+  const handleShare = async () => {
+    if (!id || sharing) return;
+    setSharing(true);
+    try {
+      const { share_token } = await shareProject(id);
+      const shareUrl = `${window.location.origin}/share/${share_token}`;
+      await navigator.clipboard.writeText(shareUrl);
+      setShareCopied(true);
+      setTimeout(() => setShareCopied(false), 3000);
+    } finally {
+      setSharing(false);
+    }
+  };
 
   const handleRecordApproved = async () => {
     if (!id || outcomeRecorded) return;
@@ -261,6 +278,14 @@ export default function ResultPage() {
               <CheckCircle size={12} /> Outcome saved
             </span>
           )}
+          <button
+            onClick={handleShare}
+            disabled={sharing}
+            className="btn-secondary text-xs flex items-center gap-1"
+          >
+            <Share2 size={12} />
+            {shareCopied ? "Link copied!" : sharing ? "Generating..." : "Share Report"}
+          </button>
           <button onClick={() => router.push("/upload")} className="btn-secondary text-xs">
             New Analysis
           </button>

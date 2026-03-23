@@ -289,3 +289,19 @@ export interface PortfolioRiskStats {
 export async function getPortfolioRisk(): Promise<PortfolioRiskStats> {
   return apiFetch(`${API_V1}/projects/portfolio`);
 }
+
+// ── Shareable Reports ──────────────────────────────────────────────────
+
+export async function shareProject(projectId: string): Promise<{
+  share_token: string;
+  share_url: string;
+}> {
+  return apiFetch(`${API_V1}/projects/${projectId}/share`, { method: "POST" });
+}
+
+export async function getSharedReport(token: string): Promise<{
+  project: Project;
+  job_id: string | null;
+}> {
+  return apiFetch(`${API_V1}/projects/share/${token}`);
+}
