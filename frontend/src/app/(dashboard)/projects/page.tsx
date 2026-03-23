@@ -141,12 +141,12 @@ export default function ProjectsPage() {
                         )}
                         {m.submission_readiness_score != null && (
                           <span className="text-gray-400">
-                            Readiness: {Math.round(m.submission_readiness_score * 100)}%
+                            Readiness: {Math.round(m.submission_readiness_score)}%
                           </span>
                         )}
                         {m.fgi_approval_probability != null && (
                           <span className="text-blue-400">
-                            FGI: {Math.round(m.fgi_approval_probability * 100)}%
+                            FGI: {Math.round(m.fgi_approval_probability)}%
                           </span>
                         )}
                         {m.estimated_correction_cost_usd != null && (

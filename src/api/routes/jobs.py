@@ -226,13 +226,19 @@ async def _run_demo_analysis(job_id: str, project_id: str, facility_type: str) -
         facility_graph = graph_engine.build(parse_result)
 
         await store.update_status(job_id, JobStatus.PROCESSING, stage="compliance_analysis", progress_pct=60)
-        # Lightweight compliance without LLM for demo speed
+        # Run deterministic compliance (no LLM) for demo speed
+        kg = RegulatoryKnowledgeGraph()
+        compliance_engine = LLMComplianceEngine(knowledge_graph=kg)
         report = ComplianceReport(project_id=project_id)
         for room in parse_result.rooms:
+            rules = kg.get_rules_for_room_type(room.room_type.value)
+            violations, passed = compliance_engine._deterministic_check(room, rules, [])
             report.room_results.append(RoomComplianceResult(
                 room_id=room.id,
                 room_label=room.label,
                 room_type=room.room_type.value,
+                violations=violations,
+                passed_rules=passed,
             ))
         report.compute_totals()
 

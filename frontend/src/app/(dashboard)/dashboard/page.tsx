@@ -222,7 +222,7 @@ export default function DashboardPage() {
                         </td>
                         <td className="py-3 text-right text-gray-300">
                           {p.metrics.fgi_approval_probability != null
-                            ? `${p.metrics.fgi_approval_probability.toFixed(0)}%`
+                            ? `${Math.round(p.metrics.fgi_approval_probability)}%`
                             : "—"}
                         </td>
                       </tr>

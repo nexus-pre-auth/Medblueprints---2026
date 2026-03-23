@@ -40,7 +40,7 @@ const RISK_COLOR: Record<string, string> = {
 };
 
 function ApprovalGauge({ probability, label }: { probability: number; label: string }) {
-  const pct = Math.round(probability * 100);
+  const pct = Math.round(probability);
   const color = pct >= 75 ? "#2ECC71" : pct >= 50 ? "#F39C12" : "#E74C3C";
   const circumference = 2 * Math.PI * 36;
   const strokeDashoffset = circumference - (pct / 100) * circumference;
@@ -182,7 +182,7 @@ export default function SharedReportPage() {
 
   const r = result.compliance_report;
   const pred = result.prediction;
-  const readinessPct = Math.round(pred.submission_readiness_score * 100);
+  const readinessPct = Math.round(pred.submission_readiness_score);
 
   return (
     <div className="min-h-screen bg-gray-950 text-white">

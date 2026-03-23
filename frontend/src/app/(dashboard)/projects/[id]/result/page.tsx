@@ -43,7 +43,7 @@ const RISK_COLOR: Record<string, string> = {
 };
 
 function ApprovalGauge({ probability, label }: { probability: number; label: string }) {
-  const pct = Math.round(probability * 100);
+  const pct = Math.round(probability);
   const color = pct >= 75 ? "#2ECC71" : pct >= 50 ? "#F39C12" : "#E74C3C";
   const circumference = 2 * Math.PI * 36;
   const strokeDashoffset = circumference - (pct / 100) * circumference;
@@ -243,7 +243,7 @@ export default function ResultPage() {
   const pred = result.prediction;
   const svgOverlay = (result.ar_scene as Record<string, string>)?.svg ?? "";
 
-  const readinessPct = Math.round(pred.submission_readiness_score * 100);
+  const readinessPct = Math.round(pred.submission_readiness_score);
   const fgiPred = pred.regulator_predictions.find((p) => p.regulator.toLowerCase().includes("fgi"));
   const ahjPred = pred.regulator_predictions.find((p) => p.regulator.toLowerCase().includes("ahj") || p.regulator.toLowerCase().includes("local"));
   const statePred = pred.regulator_predictions.find((p) => p.regulator.toLowerCase().includes("state"));

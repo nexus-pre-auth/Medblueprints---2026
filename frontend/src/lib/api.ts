@@ -113,6 +113,7 @@ export interface Project {
   status: string;
   state: string | null;
   city: string | null;
+  latest_job_id: string | null;
   metrics: {
     total_rooms: number | null;
     total_area_sqft: number | null;
