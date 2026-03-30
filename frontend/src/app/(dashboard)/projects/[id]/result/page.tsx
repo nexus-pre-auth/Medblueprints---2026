@@ -76,11 +76,21 @@ function ApprovalGauge({ probability, label }: { probability: number; label: str
 }
 
 function SVGOverlay({ svgContent }: { svgContent: string }) {
-  if (!svgContent) return null;
+  const [sanitized, setSanitized] = useState("");
+
+  useEffect(() => {
+    if (!svgContent) { setSanitized(""); return; }
+    (async () => {
+      const DOMPurify = (await import("dompurify")).default;
+      setSanitized(DOMPurify.sanitize(svgContent, { USE_PROFILES: { svg: true } }));
+    })();
+  }, [svgContent]);
+
+  if (!sanitized) return null;
   return (
     <div
       className="w-full overflow-auto rounded-lg bg-gray-900 border border-gray-800 p-2"
-      dangerouslySetInnerHTML={{ __html: svgContent }}
+      dangerouslySetInnerHTML={{ __html: sanitized }}
     />
   );
 }
