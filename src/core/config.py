@@ -40,6 +40,13 @@ class Settings(BaseSettings):
     ar_output_path: str = Field(default="./data/ar_outputs", validation_alias="AR_OUTPUT_PATH")
     webxr_base_url: str = Field(default="http://localhost:8000/ar", validation_alias="WEBXR_BASE_URL")
 
+    # CORS
+    cors_origins: str = Field(default="*", validation_alias="CORS_ORIGINS")
+
+    @property
+    def cors_origins_list(self) -> list[str]:
+        return [o.strip() for o in self.cors_origins.split(",") if o.strip()]
+
     # Logging
     log_level: str = Field(default="INFO", validation_alias="LOG_LEVEL")
 

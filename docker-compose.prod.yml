@@ -52,6 +52,7 @@ services:
       - REQUIRE_API_KEY=${REQUIRE_API_KEY:-true}
       - DEMO_API_KEY=${DEMO_API_KEY}
       - API_KEYS=${API_KEYS:-}
+      - CORS_ORIGINS=${CORS_ORIGINS:-https://medblueprints.com,https://www.medblueprints.com}
     volumes:
       # Only persist mutable outputs — NOT /app/data wholesale, which would
       # shadow the regulatory rule JSON files baked into the image.
