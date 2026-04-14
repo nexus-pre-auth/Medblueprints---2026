@@ -14,14 +14,14 @@ import {
 } from "lucide-react";
 
 const nav = [
-  { href: "/dashboard",  label: "Risk Dashboard",    icon: LayoutDashboard },
-  { href: "/portfolio",  label: "Portfolio Risk",    icon: BarChart3 },
-  { href: "/upload",     label: "Analyze Blueprint", icon: Upload },
-  { href: "/projects",   label: "Projects",          icon: Layers },
-  { href: "/compliance", label: "Regulatory Rules",  icon: ClipboardCheck },
-  { href: "/simulate",   label: "Risk Simulator",    icon: ShieldAlert },
-  { href: "/dataset",    label: "Dataset & Moat",    icon: Database },
-  { href: "/settings",   label: "Settings",          icon: Settings },
+  { href: "/dashboard",  label: "Risk Dashboard",     icon: LayoutDashboard },
+  { href: "/portfolio",  label: "Portfolio Risk",     icon: BarChart3 },
+  { href: "/upload",     label: "New Analysis",       icon: Upload },
+  { href: "/projects",   label: "Projects",           icon: Layers },
+  { href: "/compliance", label: "Regulatory Rules",   icon: ClipboardCheck },
+  { href: "/simulate",   label: "Approval Simulator", icon: ShieldAlert },
+  { href: "/dataset",    label: "Outcome Dataset",    icon: Database },
+  { href: "/settings",   label: "Settings",           icon: Settings },
 ];
 
 export function Sidebar() {
@@ -35,7 +35,7 @@ export function Sidebar() {
           <div className="w-7 h-7 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-sm">M</div>
           <span className="font-bold text-white text-sm tracking-tight">MedBlueprints</span>
         </div>
-        <p className="text-gray-500 text-xs mt-1">Construction Risk Intelligence</p>
+        <p className="text-gray-500 text-xs mt-1">Regulatory Compliance Platform</p>
       </div>
 
       {/* Navigation */}
@@ -61,7 +61,7 @@ export function Sidebar() {
 
       {/* Footer */}
       <div className="px-6 py-4 border-t border-gray-800">
-        <p className="text-gray-600 text-xs">v1.0.0 · Claude-powered</p>
+        <p className="text-gray-600 text-xs">v1.0.0 · medblueprints.com</p>
       </div>
     </aside>
   );

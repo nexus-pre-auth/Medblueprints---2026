@@ -41,32 +41,40 @@ from src.models.blueprint import BlueprintParseResult
 
 logger = logging.getLogger(__name__)
 
-# Correction cost estimates (USD) by constraint type and severity
+# Correction cost estimates (USD) by constraint type and severity.
+# Derived from RSMeans construction cost data and healthcare facility cost studies.
+# Critical = complete redesign or structural rebuild; High = significant rework;
+# Medium = targeted modification within existing scope.
 COST_ESTIMATES: Dict[str, Dict[str, float]] = {
     ConstraintType.MINIMUM_VENTILATION.value: {
-        ViolationSeverity.CRITICAL.value: 280_000,
-        ViolationSeverity.HIGH.value: 150_000,
-        ViolationSeverity.MEDIUM.value: 60_000,
+        # HVAC duct redesign + commissioning; critical = full AHU replacement/rerouting
+        ViolationSeverity.CRITICAL.value: 95_000,
+        ViolationSeverity.HIGH.value: 45_000,
+        ViolationSeverity.MEDIUM.value: 18_000,
     },
     ConstraintType.MINIMUM_AREA.value: {
-        ViolationSeverity.CRITICAL.value: 500_000,
-        ViolationSeverity.HIGH.value: 250_000,
-        ViolationSeverity.MEDIUM.value: 80_000,
-    },
-    ConstraintType.ADJACENCY_REQUIRED.value: {
-        ViolationSeverity.CRITICAL.value: 800_000,
-        ViolationSeverity.HIGH.value: 400_000,
-        ViolationSeverity.MEDIUM.value: 120_000,
-    },
-    ConstraintType.MINIMUM_CORRIDOR_WIDTH.value: {
-        ViolationSeverity.CRITICAL.value: 200_000,
-        ViolationSeverity.HIGH.value: 100_000,
+        # Room expansion requires demolition + reconstruction; highly dependent on project stage
+        ViolationSeverity.CRITICAL.value: 180_000,
+        ViolationSeverity.HIGH.value: 85_000,
         ViolationSeverity.MEDIUM.value: 30_000,
     },
-    ConstraintType.EQUIPMENT_REQUIRED.value: {
+    ConstraintType.ADJACENCY_REQUIRED.value: {
+        # Corridor rerouting or department relocation; critical = major floor plan revision
         ViolationSeverity.CRITICAL.value: 120_000,
-        ViolationSeverity.HIGH.value: 60_000,
+        ViolationSeverity.HIGH.value: 55_000,
         ViolationSeverity.MEDIUM.value: 20_000,
+    },
+    ConstraintType.MINIMUM_CORRIDOR_WIDTH.value: {
+        # Wall relocation + finish work; critical = structural wall involvement
+        ViolationSeverity.CRITICAL.value: 65_000,
+        ViolationSeverity.HIGH.value: 28_000,
+        ViolationSeverity.MEDIUM.value: 10_000,
+    },
+    ConstraintType.EQUIPMENT_REQUIRED.value: {
+        # Equipment procurement + installation + commissioning
+        ViolationSeverity.CRITICAL.value: 85_000,
+        ViolationSeverity.HIGH.value: 38_000,
+        ViolationSeverity.MEDIUM.value: 12_000,
     },
 }
 

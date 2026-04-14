@@ -121,7 +121,7 @@ export default function SimulatePage() {
         <h1 className="text-2xl font-bold text-white">Pre-Submission Approval Simulator</h1>
       </div>
       <p className="text-gray-400 text-sm mb-8">
-        Predicts regulatory approval probability before you submit — preventing million-dollar redesign mistakes.
+        Estimates regulatory approval probability based on detected violations and design features. Review results with your compliance team before submission.
       </p>
 
       {/* Job selector */}
@@ -222,10 +222,16 @@ export default function SimulatePage() {
           {/* Compliance summary */}
           {compliance.summary && (
             <div className="card">
-              <h2 className="text-white font-semibold mb-3">AI Compliance Summary</h2>
+              <h2 className="text-white font-semibold mb-3">Compliance Analysis Summary</h2>
               <p className="text-gray-300 text-sm leading-relaxed">{compliance.summary}</p>
-              <div className="mt-2 text-xs text-gray-600">
-                Model: {pred.model_version} · Confidence: {(pred.confidence * 100).toFixed(0)}%
+              <div className="mt-3 pt-3 border-t border-gray-800 flex items-start justify-between gap-4">
+                <p className="text-gray-600 text-xs">
+                  Approval probability is estimated based on violation counts and design patterns.
+                  This is an analytical estimate — not a regulatory determination. All findings should be reviewed by a licensed professional prior to submission.
+                </p>
+                <span className="text-gray-600 text-xs whitespace-nowrap">
+                  Model {pred.model_version} · {(pred.confidence * 100).toFixed(0)}% confidence
+                </span>
               </div>
             </div>
           )}

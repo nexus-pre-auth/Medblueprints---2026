@@ -92,7 +92,7 @@ export default function DashboardPage() {
         <div>
           <h1 className="text-2xl font-bold text-white">Executive Risk Dashboard</h1>
           <p className="text-gray-400 text-sm mt-1">
-            Construction risk intelligence across your portfolio
+            Regulatory compliance risk across active construction projects
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -168,7 +168,7 @@ export default function DashboardPage() {
           {projects.length === 0 ? (
             <div className="text-center py-12">
               <Upload size={32} className="text-gray-700 mx-auto mb-3" />
-              <p className="text-gray-500 text-sm">No projects yet. Upload a blueprint to generate your first risk assessment.</p>
+              <p className="text-gray-500 text-sm">No projects yet. Upload a blueprint to run your first pre-submission compliance analysis.</p>
               <Link href="/upload" className="btn-primary inline-flex items-center gap-2 mt-4 text-sm">
                 Upload blueprint
               </Link>

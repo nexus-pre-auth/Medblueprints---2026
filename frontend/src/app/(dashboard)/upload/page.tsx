@@ -8,11 +8,11 @@ import { Upload, FileImage, AlertCircle, CheckCircle, Loader2 } from "lucide-rea
 
 const STAGE_LABELS: Record<string, string> = {
   ingestion: "Processing file",
-  cv_parsing: "Detecting rooms (Computer Vision)",
+  cv_parsing: "Extracting room geometry",
   facility_graph: "Building facility graph",
-  compliance_analysis: "Running compliance analysis",
-  approval_prediction: "Predicting approval probability",
-  ar_visualization: "Generating AR visualization",
+  compliance_analysis: "Running standards review",
+  approval_prediction: "Computing approval probability",
+  ar_visualization: "Generating compliance overlay",
   error: "Error",
 };
 
@@ -76,9 +76,9 @@ export default function UploadPage() {
 
   return (
     <div className="p-8 max-w-3xl mx-auto">
-      <h1 className="text-2xl font-bold text-white mb-2">Upload Blueprint</h1>
+      <h1 className="text-2xl font-bold text-white mb-2">Blueprint Compliance Analysis</h1>
       <p className="text-gray-400 text-sm mb-8">
-        Upload a healthcare facility blueprint to run the full AI compliance analysis pipeline.
+        Upload a healthcare facility blueprint to check it against FGI, NFPA 101, ASHRAE 170, ADA, and Joint Commission standards.
       </p>
 
       {!job ? (
@@ -133,8 +133,8 @@ export default function UploadPage() {
               className="w-4 h-4 accent-blue-500"
             />
             <div>
-              <span className="text-white text-sm font-medium">Use demo blueprint</span>
-              <p className="text-gray-400 text-xs mt-0.5">Try the full pipeline with a synthetic hospital floor plan</p>
+              <span className="text-white text-sm font-medium">Use sample blueprint</span>
+              <p className="text-gray-400 text-xs mt-0.5">Run a demonstration analysis on a synthetic hospital floor plan — results are not based on real construction data</p>
             </div>
           </label>
 
@@ -162,8 +162,11 @@ export default function UploadPage() {
           )}
 
           <button type="submit" disabled={submitting} className="btn-primary w-full flex items-center justify-center gap-2">
-            {submitting ? <><Loader2 size={16} className="animate-spin" /> Starting analysis...</> : "Run AI Analysis"}
+            {submitting ? <><Loader2 size={16} className="animate-spin" /> Starting analysis...</> : "Start Compliance Analysis"}
           </button>
+          <p className="text-center text-gray-600 text-xs">
+            Uploaded files are used only for this analysis. Results are retained per your organization&apos;s data settings.
+          </p>
         </form>
       ) : (
         /* Progress view */

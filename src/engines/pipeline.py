@@ -123,13 +123,16 @@ class MedBlueprintsPipeline:
         try:
             if use_demo or not image_path:
                 parse_result = CVBlueprintEngine.create_demo_parse_result(pid)
+                if not use_demo:
+                    errors.append("No image provided — used synthetic demonstration data")
             else:
                 cv_engine = CVBlueprintEngine()
                 parse_result = cv_engine.parse_image(image_path=image_path, project_id=pid)
         except Exception as exc:
-            logger.error("CV engine failed: %s — using demo", exc)
-            parse_result = CVBlueprintEngine.create_demo_parse_result(pid)
-            errors.append(f"CV engine fallback: {exc}")
+            # CV engine failed on the provided image. Do NOT silently substitute demo data,
+            # as this would give misleading results. Raise so the job is marked failed.
+            logger.error("[%s] CV engine failed: %s", pid, exc)
+            raise RuntimeError(f"Blueprint parsing failed: {exc}") from exc
 
         # ── Layer 2: Digital Facility Graph ───────────────────────────
         logger.info("[%s] Layer 2: Digital Facility Graph", pid)
